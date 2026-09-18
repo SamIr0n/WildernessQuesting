@@ -10,9 +10,9 @@ import net.neoforged.neoforge.client.gui.IConfigScreenFactory;
 import static io.github.samir0n.wquesting.WildernessQuesting.MOD_ID;
 
 @Mod(value = MOD_ID, dist = Dist.CLIENT)
-public class WildernessQuestingClient {
+public class WQClient {
 
-    public WildernessQuestingClient(final IEventBus eventBus, final ModContainer container) {
+    public WQClient(final IEventBus eventBus, final ModContainer container) {
         container.registerExtensionPoint(IConfigScreenFactory.class, ConfigurationScreen::new);
     }
 }

@@ -1,0 +1,5 @@
+{
+  "config.questing_enable": "Questing",
+  "config.quest_book_item_enable": "Quest Book Item",
+  "config.quest_book_item_requirement_enable": "Require Quest Book Item"
+}
