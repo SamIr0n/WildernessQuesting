@@ -13,6 +13,19 @@ sourceSets.main.resources {
     exclude("src/generated/**/.cache")
 }
 
+sourceSets {
+    gameTest {
+        compileClasspath += sourceSets.main.output
+        runtimeClasspath += sourceSets.main.output
+    }
+}
+
+configurations {
+    runtimeClasspath.extendsFrom localRuntime
+    gameTestImplementation.extendsFrom implementation
+    gameTestRuntimeOnly.extendsFrom runtimeOnly
+}
+
 repositories {
     mavenCentral()
 }
@@ -30,6 +43,11 @@ runs {
 
         workingDirectory project.layout.projectDirectory.dir('run').dir(name)
         modSource project.sourceSets.main
+    }
+
+    gameTestServer {
+        systemProperty 'neoforge.enabledGameTestNamespaces', project.mod_id
+        modSource project.sourceSets.gameTest
     }
 
     data {
@@ -71,10 +89,14 @@ tasks.withType(JavaCompile).configureEach {
     options.encoding = 'UTF-8'
 }
 
+tasks.named('check') { dependsOn 'gameTestClasses' }
+
 idea {
     module {
         downloadSources = true
         downloadJavadoc = true
+        testSources.from(sourceSets.gameTest.java.srcDirs)
+        testResources.from(sourceSets.gameTest.resources.srcDirs)
     }
 }
 

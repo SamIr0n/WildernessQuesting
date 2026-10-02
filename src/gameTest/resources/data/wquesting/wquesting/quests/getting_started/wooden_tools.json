@@ -1,0 +1,16 @@
+{
+  "name": {
+    "text": "Wooden Tools"
+  },
+  "description": {
+    "text": "Craft a wooden pickaxe and axe."
+  },
+  "icon": {
+    "type": "wquesting:item",
+    "value": "minecraft:wooden_pickaxe"
+  },
+  "requires": [
+    "wquesting:getting_started/craft_table",
+    "wquesting:getting_started/gather_wood"
+  ]
+}

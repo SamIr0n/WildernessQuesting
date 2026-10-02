@@ -1,0 +1,12 @@
+{
+  "name": {
+    "text": "Welcome"
+  },
+  "description": {
+    "text": "Your journey into the wilderness begins here."
+  },
+  "icon": {
+    "type": "wquesting:texture",
+    "value": "wquesting:textures/gui/icons/wilderness.png"
+  }
+}

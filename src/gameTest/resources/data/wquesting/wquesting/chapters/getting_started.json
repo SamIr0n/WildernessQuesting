@@ -1,0 +1,18 @@
+{
+  "name": {
+    "text": "Getting Started"
+  },
+  "description": {
+    "text": "Your first steps in the wild."
+  },
+  "icon": {
+    "type": "wquesting:item",
+    "value": "minecraft:crafting_table"
+  },
+  "quests": [
+    "wquesting:getting_started/welcome",
+    "wquesting:getting_started/gather_wood",
+    "wquesting:getting_started/craft_table",
+    "wquesting:getting_started/wooden_tools"
+  ]
+}

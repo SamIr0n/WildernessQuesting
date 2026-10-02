@@ -1,0 +1,15 @@
+{
+  "name": {
+    "text": "Punch a Tree"
+  },
+  "description": {
+    "text": "Collect a few logs by hand."
+  },
+  "icon": {
+    "type": "wquesting:item",
+    "value": "minecraft:oak_log"
+  },
+  "requires": [
+    "wquesting:getting_started/welcome"
+  ]
+}

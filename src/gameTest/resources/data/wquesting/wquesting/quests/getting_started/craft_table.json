@@ -1,0 +1,15 @@
+{
+  "name": {
+    "text": "Crafting Table"
+  },
+  "description": {
+    "text": "Turn logs into planks, then into a crafting table."
+  },
+  "icon": {
+    "type": "wquesting:item",
+    "value": "minecraft:crafting_table"
+  },
+  "requires": [
+    "wquesting:getting_started/gather_wood"
+  ]
+}
