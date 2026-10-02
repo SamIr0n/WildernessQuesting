@@ -10,8 +10,12 @@ import net.neoforged.neoforge.registries.RegistryBuilder;
 
 import java.util.function.Function;
 
+import static io.github.samir0n.wquesting.WildernessQuesting.MOD_ID;
+import static net.minecraft.resources.ResourceKey.createRegistryKey;
+import static net.minecraft.resources.ResourceLocation.fromNamespaceAndPath;
+
 public interface Icon<Self extends Icon<Self>> {
-    ResourceKey<Registry<MapCodec<? extends Icon<?>>>> TYPE_KEY = ResourceKey.createRegistryKey(ResourceLocation.fromNamespaceAndPath("wquesting", "icon_type"));
+    ResourceKey<Registry<MapCodec<? extends Icon<?>>>> TYPE_KEY = createRegistryKey(fromNamespaceAndPath(MOD_ID, "icon_type"));
     Registry<MapCodec<? extends Icon<?>>> TYPES = new RegistryBuilder<>(TYPE_KEY).create();
     Codec<Icon<?>> CODEC = TYPES.byNameCodec().dispatch(Icon::codec, Function.identity());
     MapCodec<Self> codec();
