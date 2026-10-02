@@ -1,6 +1,5 @@
 package io.github.samir0n.wquesting;
 
-import com.mojang.logging.LogUtils;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.fml.ModContainer;
 import net.neoforged.fml.common.Mod;
@@ -14,16 +13,12 @@ public class WildernessQuesting {
     public static final String MOD_ID = "wquesting";
 
     public WildernessQuesting(final IEventBus eventBus, final ModContainer container) {
-
         eventBus.addListener(this::commonSetup);
-
-
-
         container.registerConfig(ModConfig.Type.COMMON, WQConfig.SPEC);
-
     }
 
     private void commonSetup(final FMLCommonSetupEvent event) {
+
     }
 
 }

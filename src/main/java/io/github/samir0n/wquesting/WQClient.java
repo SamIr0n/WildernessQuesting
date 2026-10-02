@@ -11,7 +11,6 @@ import static io.github.samir0n.wquesting.WildernessQuesting.MOD_ID;
 
 @Mod(value = MOD_ID, dist = Dist.CLIENT)
 public class WQClient {
-
     public WQClient(final IEventBus eventBus, final ModContainer container) {
         container.registerExtensionPoint(IConfigScreenFactory.class, ConfigurationScreen::new);
     }
