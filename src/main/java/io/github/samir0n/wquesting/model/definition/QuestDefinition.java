@@ -10,6 +10,7 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.ComponentSerialization;
 import net.minecraft.resources.RegistryFixedCodec;
 import net.minecraft.resources.ResourceKey;
+import net.neoforged.neoforge.event.entity.player.AdvancementEvent;
 
 import java.util.Set;
 
@@ -31,3 +32,6 @@ public record QuestDefinition(Component name, Component description, Icon<?> ico
         REF_SET_CODEC.optionalFieldOf("requires", Set.of()).forGetter(QuestDefinition::requires)
     ).apply(i, QuestDefinition::new));
 }
+
+
+
