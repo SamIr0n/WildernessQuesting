@@ -1,4 +1,7 @@
 {
+  "behaviour": {
+    "type": "wquesting:chat"
+  },
   "name": {
     "text": "Crafting Table"
   },

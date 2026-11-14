@@ -2,7 +2,9 @@ package io.github.samir0n.wquesting;
 
 import com.mojang.logging.LogUtils;
 import io.github.samir0n.wquesting.model.definition.*;
-import io.github.samir0n.wquesting.model.instance.SimpleQuestInstance;
+import io.github.samir0n.wquesting.model.instance.BaseQuestInstance;
+import io.github.samir0n.wquesting.model.instance.ChatQuestInstance;
+import io.github.samir0n.wquesting.model.registry.BehaviourType;
 import net.minecraft.server.level.ServerPlayer;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.fml.ModContainer;
@@ -29,6 +31,7 @@ public class WildernessQuesting {
         eventBus.addListener(this::registerDatapackRegistries);
 
         AttachmentTypes.ATTACHMENT_TYPES.register(eventBus);
+        BehaviourType.BEHAVIOUR_TYPES.register(eventBus);
         NeoForge.EVENT_BUS.addListener(this::onServerChat);
 
         ModIcons.ICON_TYPES.register(eventBus);
@@ -51,10 +54,12 @@ public class WildernessQuesting {
 
     private void onServerChat(final ServerChatEvent event) {
         final ServerPlayer player = event.getPlayer();
-        final SimpleQuestInstance questInstance = player.getData(AttachmentTypes.QUEST_INSTANCE);
-        questInstance.messageCount++;
+        final BaseQuestInstance questInstance = player.getData(AttachmentTypes.QUEST_INSTANCE);
+        if (questInstance instanceof ChatQuestInstance chatQuestInstance) {
+            chatQuestInstance.messageCount++;
 
-        LOGGER.info("Player {} has sent {} message/s", player.getGameProfile().getName(), questInstance.messageCount);
+            LOGGER.info("Player {} has sent {} message/s", player.getGameProfile().getName(), chatQuestInstance.messageCount);
+        }
     }
 }
 
