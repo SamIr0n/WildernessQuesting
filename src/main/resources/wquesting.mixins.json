@@ -1,0 +1,12 @@
+{
+  "required": true,
+  "minVersion": "0.8",
+  "package": "io.github.samir0n.wquesting.mixin",
+  "compatibilityLevel": "JAVA_21",
+  "mixins": [
+    "InventoryChangeTriggerMixin"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}

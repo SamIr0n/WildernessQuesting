@@ -14,6 +14,9 @@ description='''
 Wilderness Questing is a flexible, data-driven quest framework built for modpack creators and developers. Create branching quest lines with configurable objectives, requirements, conditions, and rewards using JSON. The mod provides the framework and quest book without imposing a predefined quest line, leaving every pack free to create its own adventure.
 '''
 
+[[mixins]]
+config="${mod_id}.mixins.json"
+
 [[dependencies.${mod_id}]]
 modId="neoforge"
 type="required"
