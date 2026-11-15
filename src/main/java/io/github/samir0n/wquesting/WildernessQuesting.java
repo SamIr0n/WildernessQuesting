@@ -31,6 +31,7 @@ public class WildernessQuesting {
         AttachmentTypes.ATTACHMENT_TYPES.register(eventBus);
         BehaviourType.BEHAVIOUR_TYPES.register(eventBus);
         NeoForge.EVENT_BUS.addListener(this::onServerChat);
+        NeoForge.EVENT_BUS.addListener(WQCommands::register);
 
         ModIcons.ICON_TYPES.register(eventBus);
         container.registerConfig(ModConfig.Type.COMMON, WQConfig.SPEC);
