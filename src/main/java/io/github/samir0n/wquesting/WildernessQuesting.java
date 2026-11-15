@@ -2,10 +2,8 @@ package io.github.samir0n.wquesting;
 
 import com.mojang.logging.LogUtils;
 import io.github.samir0n.wquesting.model.definition.*;
-import io.github.samir0n.wquesting.model.instance.BaseQuestInstance;
-import io.github.samir0n.wquesting.model.instance.ChatQuestInstance;
+import io.github.samir0n.wquesting.model.instance.*;
 import io.github.samir0n.wquesting.model.registry.BehaviourType;
-import net.minecraft.server.level.ServerPlayer;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.fml.ModContainer;
 import net.neoforged.fml.common.Mod;
@@ -53,13 +51,8 @@ public class WildernessQuesting {
     }
 
     private void onServerChat(final ServerChatEvent event) {
-        final ServerPlayer player = event.getPlayer();
-        final BaseQuestInstance questInstance = player.getData(AttachmentTypes.QUEST_INSTANCE);
-        if (questInstance instanceof ChatQuestInstance chatQuestInstance) {
-            chatQuestInstance.messageCount++;
-
-            LOGGER.info("Player {} has sent {} message/s", player.getGameProfile().getName(), chatQuestInstance.messageCount);
-        }
+        final BaseQuestInstance quest = event.getPlayer().getData(AttachmentTypes.QUEST_ATTACHMENT).getQuest();
+        if (quest != null) quest.update(new ChatQuestEvent());
     }
 }
 
