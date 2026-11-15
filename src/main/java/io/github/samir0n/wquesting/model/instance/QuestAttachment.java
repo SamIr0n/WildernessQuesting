@@ -1,6 +1,10 @@
 package io.github.samir0n.wquesting.model.instance;
 
 import com.mojang.serialization.Codec;
+import io.github.samir0n.wquesting.model.definition.AttachmentTypes;
+import io.github.samir0n.wquesting.model.definition.QuestDefinition;
+import net.minecraft.core.Holder;
+import net.minecraft.server.level.ServerPlayer;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.Optional;
@@ -21,8 +25,14 @@ public final class QuestAttachment {
         return instance;
     }
 
-    public void setQuest(@Nullable final BaseQuestInstance instance) {
+    public BaseQuestInstance startQuest(final ServerPlayer player, final Holder<QuestDefinition> definition) {
+        final BaseQuestInstance instance = definition.value().behaviour().createInstance(definition);
         this.instance = instance;
-        
+        instance.update(player, new QuestStartEvent());
+        return instance;
+    }
+
+    public void cancelQuest(final ServerPlayer player) {
+        player.removeData(AttachmentTypes.QUEST_ATTACHMENT);
     }
 }

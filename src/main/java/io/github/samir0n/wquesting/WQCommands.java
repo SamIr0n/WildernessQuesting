@@ -41,7 +41,7 @@ public final class WQCommands {
 
     private static int start(final CommandContext<CommandSourceStack> ctx, final Collection<ServerPlayer> targets) throws CommandSyntaxException {
         final Holder.Reference<QuestDefinition> quest = ResourceArgument.getResource(ctx, "quest", QuestDefinition.REGISTRY_KEY);
-        for (final ServerPlayer player : targets) player.getData(AttachmentTypes.QUEST_ATTACHMENT).setQuest(quest.value().behaviour().createInstance(quest));
+        for (final ServerPlayer player : targets) player.getData(AttachmentTypes.QUEST_ATTACHMENT).startQuest(player, quest);
 
         if (targets.size() == 1) {
             final Component name = targets.iterator().next().getDisplayName();
