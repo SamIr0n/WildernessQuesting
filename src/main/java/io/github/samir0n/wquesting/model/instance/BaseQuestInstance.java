@@ -6,6 +6,7 @@ import com.mojang.serialization.codecs.RecordCodecBuilder;
 import io.github.samir0n.wquesting.model.definition.QuestDefinition;
 import io.github.samir0n.wquesting.model.registry.QuestBehaviour;
 import net.minecraft.core.Holder;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.util.StringRepresentable;
 import org.jetbrains.annotations.NotNull;
 
@@ -45,8 +46,8 @@ public abstract class BaseQuestInstance implements QuestInstance {
 
     @Override
     @SuppressWarnings("unchecked")
-    public final void update(final QuestEvent event) {
-        ((QuestBehaviour<BaseQuestInstance>) definition.value().behaviour()).handle(this, event);
+    public final void update(final ServerPlayer player, final QuestEvent event) {
+        ((QuestBehaviour<BaseQuestInstance>) definition.value().behaviour()).handle(player, this, event);
     }
 
     public static final Codec<BaseQuestInstance> CODEC = QuestDefinition.REF_CODEC.<BaseQuestInstance>dispatchMap(

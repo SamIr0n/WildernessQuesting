@@ -7,6 +7,7 @@ import io.github.samir0n.wquesting.model.instance.ChatQuestEvent;
 import io.github.samir0n.wquesting.model.instance.ChatQuestInstance;
 import io.github.samir0n.wquesting.model.instance.QuestEvent;
 import net.minecraft.core.Holder;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.util.ExtraCodecs;
 
 /**
@@ -43,7 +44,7 @@ public class ChatQuestBehaviour extends QuestBehaviour<ChatQuestInstance> {
     }
 
     @Override
-    public void handle(ChatQuestInstance instance, QuestEvent event) {
+    public void handle(ServerPlayer player, ChatQuestInstance instance, QuestEvent event) {
         if (!(event instanceof ChatQuestEvent) || instance.state() != BaseQuestInstance.State.IN_PROGRESS) {
             return;
         }

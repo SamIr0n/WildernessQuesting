@@ -23,5 +23,6 @@ public final class QuestAttachment {
 
     public void setQuest(@Nullable final BaseQuestInstance instance) {
         this.instance = instance;
+        
     }
 }

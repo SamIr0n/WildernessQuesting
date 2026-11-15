@@ -4,6 +4,7 @@ import com.mojang.logging.LogUtils;
 import io.github.samir0n.wquesting.model.definition.*;
 import io.github.samir0n.wquesting.model.instance.*;
 import io.github.samir0n.wquesting.model.registry.BehaviourType;
+import net.minecraft.server.level.ServerPlayer;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.fml.ModContainer;
 import net.neoforged.fml.common.Mod;
@@ -11,6 +12,7 @@ import net.neoforged.fml.config.ModConfig;
 import net.neoforged.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.neoforged.neoforge.common.NeoForge;
 import net.neoforged.neoforge.event.ServerChatEvent;
+import net.neoforged.neoforge.event.entity.player.ItemEntityPickupEvent;
 import net.neoforged.neoforge.registries.DataPackRegistryEvent;
 import net.neoforged.neoforge.registries.NewRegistryEvent;
 import org.slf4j.Logger;
@@ -53,7 +55,7 @@ public class WildernessQuesting {
 
     private void onServerChat(final ServerChatEvent event) {
         final BaseQuestInstance quest = event.getPlayer().getData(AttachmentTypes.QUEST_ATTACHMENT).getQuest();
-        if (quest != null) quest.update(new ChatQuestEvent());
+        if (quest != null) quest.update(event.getPlayer(),new ChatQuestEvent());
     }
 }
 

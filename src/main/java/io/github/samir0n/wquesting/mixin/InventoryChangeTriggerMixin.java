@@ -24,6 +24,6 @@ public abstract class InventoryChangeTriggerMixin {
     )
     private void wquesting$onInventoryChanged(final ServerPlayer player, final Inventory inventory, final ItemStack stack, final CallbackInfo ci) {
         final BaseQuestInstance quest = player.getData(AttachmentTypes.QUEST_ATTACHMENT).getQuest();
-        if (quest != null) quest.update(new InventoryQuestEvent(player, stack));
+        if (quest != null) quest.update(player,new InventoryQuestEvent(stack));
     }
 }

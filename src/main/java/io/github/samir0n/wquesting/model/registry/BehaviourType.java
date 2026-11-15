@@ -21,4 +21,6 @@ public record BehaviourType<T extends QuestBehaviour<?>>(MapCodec<T> codec) {
     public static final Registry<BehaviourType<?>> BEHAVIOUR_TYPE_REGISTRY = BEHAVIOUR_TYPES.makeRegistry(builder -> builder.sync(true));
 
     public static final Supplier<BehaviourType<ChatQuestBehaviour>> CHAT = BEHAVIOUR_TYPES.register("chat", () -> new BehaviourType<>(ChatQuestBehaviour.CODEC));
+
+    public static final Supplier<BehaviourType<CollectionQuestBehaviour>> COLLECTION = BEHAVIOUR_TYPES.register("collection", ()-> new BehaviourType<>(CollectionQuestBehaviour.CODEC));
 }
