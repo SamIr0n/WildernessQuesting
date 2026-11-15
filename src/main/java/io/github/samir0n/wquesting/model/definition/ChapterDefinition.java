@@ -21,6 +21,9 @@ import static io.github.samir0n.wquesting.WildernessQuesting.MOD_ID;
 import static net.minecraft.resources.ResourceKey.createRegistryKey;
 import static net.minecraft.resources.ResourceLocation.fromNamespaceAndPath;
 
+/**
+ * Represents the definition of a chapter within a storyline: its description and the quest graph for that chapter.
+ * */
 @SuppressWarnings("UnstableApiUsage")
 public record ChapterDefinition(
     Component name, Component description, Icon<?> icon,

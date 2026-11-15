@@ -13,6 +13,9 @@ import static io.github.samir0n.wquesting.WildernessQuesting.MOD_ID;
 import static net.minecraft.resources.ResourceKey.createRegistryKey;
 import static net.minecraft.resources.ResourceLocation.fromNamespaceAndPath;
 
+/**
+ * Represents a full storyline, an ordered list of chapters that a player goes through one by one.
+ * */
 public record StoryDefinition(List<Holder<ChapterDefinition>> chapters) {
     public static final ResourceKey<Registry<StoryDefinition>> REGISTRY_KEY = createRegistryKey(fromNamespaceAndPath(MOD_ID, "stories"));
     public static final Codec<StoryDefinition> CODEC = RecordCodecBuilder.create(instance -> instance.group(

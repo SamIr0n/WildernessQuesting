@@ -14,12 +14,18 @@ import static io.github.samir0n.wquesting.WildernessQuesting.MOD_ID;
 import static net.minecraft.resources.ResourceKey.createRegistryKey;
 import static net.minecraft.resources.ResourceLocation.fromNamespaceAndPath;
 
+/**
+ * An icon used to describe quest elements; may be e.g. an item texture or any arbitrary texture.
+ * */
 public interface Icon<Self extends Icon<Self>> {
     ResourceKey<Registry<MapCodec<? extends Icon<?>>>> TYPE_KEY = createRegistryKey(fromNamespaceAndPath(MOD_ID, "icon_type"));
     Registry<MapCodec<? extends Icon<?>>> TYPES = new RegistryBuilder<>(TYPE_KEY).create();
     Codec<Icon<?>> CODEC = TYPES.byNameCodec().dispatch(Icon::codec, Function.identity());
     MapCodec<Self> codec();
 
+    /**
+     * An item-based icon.
+     * */
     record ItemIcon(ResourceLocation path) implements Icon<ItemIcon> {
         public static final MapCodec<ItemIcon> CODEC = RecordCodecBuilder.mapCodec(i -> i.group(
             ResourceLocation.CODEC.fieldOf("value").forGetter(ItemIcon::path)
@@ -28,6 +34,9 @@ public interface Icon<Self extends Icon<Self>> {
         @Override public MapCodec<ItemIcon> codec() { return CODEC; }
     }
 
+    /**
+     * An icon based on a custom texture.
+     * */
     record TextureIcon(ResourceLocation path) implements Icon<TextureIcon> {
         public static final MapCodec<TextureIcon> CODEC = RecordCodecBuilder.mapCodec(i -> i.group(
             ResourceLocation.CODEC.fieldOf("value").forGetter(TextureIcon::path)
