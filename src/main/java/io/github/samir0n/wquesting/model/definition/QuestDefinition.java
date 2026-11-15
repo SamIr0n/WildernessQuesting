@@ -18,7 +18,10 @@ import static io.github.samir0n.wquesting.WildernessQuesting.MOD_ID;
 import static net.minecraft.resources.ResourceKey.createRegistryKey;
 import static net.minecraft.resources.ResourceLocation.fromNamespaceAndPath;
 
-public record QuestDefinition(Component name, Component description, Icon<?> icon, Set<Holder<QuestDefinition>> requires, QuestBehaviour behaviour) {
+/**
+ * Defines a quest as part of the storyline: its description, placement in the storyline's quest graph, and specific behaviour, e.g. "collect all 900 eggs"
+ * */
+public record QuestDefinition(Component name, Component description, Icon<?> icon, Set<Holder<QuestDefinition>> requires, QuestBehaviour<?> behaviour) {
     public static final ResourceKey<Registry<QuestDefinition>> REGISTRY_KEY = createRegistryKey(fromNamespaceAndPath(MOD_ID, "quests"));
     public static final Codec<Holder<QuestDefinition>> REF_CODEC = RegistryFixedCodec.create(REGISTRY_KEY);
 

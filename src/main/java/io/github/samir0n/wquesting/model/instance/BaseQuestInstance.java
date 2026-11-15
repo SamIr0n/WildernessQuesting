@@ -1,11 +1,17 @@
 package io.github.samir0n.wquesting.model.instance;
 
+import com.mojang.datafixers.Products;
 import com.mojang.serialization.Codec;
+import com.mojang.serialization.codecs.RecordCodecBuilder;
 import io.github.samir0n.wquesting.model.definition.QuestDefinition;
+import io.github.samir0n.wquesting.model.registry.QuestBehaviour;
 import net.minecraft.core.Holder;
 import net.minecraft.util.StringRepresentable;
 import org.jetbrains.annotations.NotNull;
 
+/**
+ * Common quest state for all quest instances, e.g. whether it has been completed and which quest it is.
+ * */
 public abstract class BaseQuestInstance implements QuestInstance {
 
     protected State state = State.IN_PROGRESS;
@@ -28,7 +34,7 @@ public abstract class BaseQuestInstance implements QuestInstance {
         return this.state;
     }
 
-    public void setState(State state) {
+    public void setState(final State state) {
         this.state = state;
     }
 
@@ -38,8 +44,9 @@ public abstract class BaseQuestInstance implements QuestInstance {
     }
 
     @Override
-    public void update(QuestEvent event) {
-
+    @SuppressWarnings("unchecked")
+    public final void update(final QuestEvent event) {
+        ((QuestBehaviour<BaseQuestInstance>) definition.value().behaviour()).handle(this, event);
     }
 
     public static final Codec<BaseQuestInstance> CODEC = QuestDefinition.REF_CODEC.<BaseQuestInstance>dispatchMap(
@@ -48,8 +55,22 @@ public abstract class BaseQuestInstance implements QuestInstance {
         holder -> holder.value().behaviour().instanceCodec(holder)
     ).codec();
 
+    protected static <T extends BaseQuestInstance> Products.P1<RecordCodecBuilder.Mu<T>, State> commonFields(final RecordCodecBuilder.Instance<T> builder) {
+        return builder.group(State.CODEC.optionalFieldOf("state", State.IN_PROGRESS).forGetter(BaseQuestInstance::state));
+    }
+
+    /**
+     * The state of an active quest.
+     * */
     public enum State implements QuestState, StringRepresentable {
-        IN_PROGRESS, COMPLETED;
+        /**
+         * The quest has been started but has not been completed yet.
+         * */
+        IN_PROGRESS,
+        /**
+         * The quest has been completed but a new one has not been started yet.
+         * */
+        COMPLETED;
 
         public static final Codec<State> CODEC = StringRepresentable.fromEnum(State::values);
 

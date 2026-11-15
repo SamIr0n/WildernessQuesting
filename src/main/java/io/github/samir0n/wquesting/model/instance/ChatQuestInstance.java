@@ -4,8 +4,13 @@ import com.mojang.serialization.Codec;
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import io.github.samir0n.wquesting.model.definition.QuestDefinition;
+import io.github.samir0n.wquesting.model.registry.ChatQuestBehaviour;
 import net.minecraft.core.Holder;
 
+/**
+ * Represents the state of a chat quest instance, i.e. the number of messages the player has sent thus far.
+ * @see ChatQuestBehaviour
+ * */
 public class ChatQuestInstance extends BaseQuestInstance {
 
     public int messageCount = 0;
@@ -15,26 +20,12 @@ public class ChatQuestInstance extends BaseQuestInstance {
         this.messageCount = messageCount;
     }
 
-    public ChatQuestInstance(Holder<QuestDefinition> definition, int messageCount) {
-        super(definition);
-        this.messageCount = messageCount;
-    }
-
     public ChatQuestInstance(Holder<QuestDefinition> definition) {
         super(definition);
     }
 
-    public ChatQuestInstance() {
-    }
-
-    @Override
-    public void update(QuestEvent event) {
-
-    }
-
     public static MapCodec<ChatQuestInstance> codec(Holder<QuestDefinition> definition) {
-        return RecordCodecBuilder.mapCodec(i -> i.group(
-            State.CODEC.optionalFieldOf("state", State.IN_PROGRESS).forGetter(BaseQuestInstance::state),
+        return RecordCodecBuilder.mapCodec(i -> commonFields(i).and(
             Codec.INT.optionalFieldOf("message_count", 0).forGetter(instance -> instance.messageCount)
         ).apply(i, (state, messageCount) -> new ChatQuestInstance(definition, state, messageCount)));
     }
