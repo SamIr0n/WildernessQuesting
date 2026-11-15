@@ -3,10 +3,7 @@ package io.github.samir0n.wquesting.model.registry;
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import io.github.samir0n.wquesting.model.definition.QuestDefinition;
-import io.github.samir0n.wquesting.model.instance.BaseQuestInstance;
-import io.github.samir0n.wquesting.model.instance.CollectionQuestInstance;
-import io.github.samir0n.wquesting.model.instance.InventoryQuestEvent;
-import io.github.samir0n.wquesting.model.instance.QuestEvent;
+import io.github.samir0n.wquesting.model.instance.*;
 import net.minecraft.advancements.critereon.ItemPredicate;
 import net.minecraft.core.Holder;
 import net.minecraft.server.level.ServerPlayer;
@@ -56,7 +53,7 @@ public class CollectionQuestBehaviour extends QuestBehaviour<CollectionQuestInst
 
     @Override
     public void handle(ServerPlayer player, CollectionQuestInstance instance, QuestEvent event) {
-        if (!(event instanceof InventoryQuestEvent) || instance.state() != BaseQuestInstance.State.IN_PROGRESS) {
+        if (!(event instanceof InventoryQuestEvent || event instanceof QuestStartEvent) || instance.state() != BaseQuestInstance.State.IN_PROGRESS) {
             return;
         }
 
@@ -70,7 +67,6 @@ public class CollectionQuestBehaviour extends QuestBehaviour<CollectionQuestInst
 
         if(totalItemCount >= itemCount) {
             instance.setState(BaseQuestInstance.State.COMPLETED);
-            player.playNotifySound(SoundEvents.EVOKER_PREPARE_WOLOLO, SoundSource.HOSTILE, 1f, 1f);
         }
     }
 }
